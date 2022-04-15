@@ -6,7 +6,10 @@ public class App {
         int GAME_HEIGHT = 1000;
         
         SnakeModel snakeModel = new SnakeModel(GAME_WIDTH, GAME_HEIGHT);
-        SnakeView snakeView = new SnakeView();
+        SnakeView snakeView = new SnakeView(GAME_WIDTH, GAME_HEIGHT);
         new SnakeController(snakeModel, snakeView);
+
+        snakeView.setVisible(true);
     }
+    
 }
