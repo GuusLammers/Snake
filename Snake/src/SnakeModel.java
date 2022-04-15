@@ -21,6 +21,18 @@ public class SnakeModel {
         this.maxX = GAME_WIDTH / 10;
         this.minY = 0;
         this.maxY = GAME_HEIGHT / 10;
+
+        restart();
+    }
+
+    public void restart() {
+        /*
+        Restarts the snake model. Resets snakeCoordinates, preyCoordinate, currentScore, and isAlive.
+        */
+        createSnake();
+        createPrey();
+        this.currentScore = 0;
+        this.isAlive = true;
     }
 
     public void gameTick() throws Exception {
