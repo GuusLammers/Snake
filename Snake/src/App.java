@@ -7,6 +7,6 @@ public class App {
         
         SnakeModel snakeModel = new SnakeModel(GAME_WIDTH, GAME_HEIGHT);
         SnakeView snakeView = new SnakeView();
-        SnakeController snakeController = new SnakeController(snakeModel, snakeView);
+        new SnakeController(snakeModel, snakeView);
     }
 }
