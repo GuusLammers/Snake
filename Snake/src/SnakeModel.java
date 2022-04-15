@@ -33,7 +33,8 @@ public class SnakeModel {
 
     private void createSnake() {
         /*
-        Create a snake with an initial length of 5 units that starts in the middle of the screen.
+        Create a snake with an initial length of 5 units that starts in the middle of the screen. The head of the snake is
+        represented by the coordinate at the end of the snakeCoordinates list.
         */
         int xCoordinate = ((int) this.maxX / 2) - 2; 
         int yCoordinate = (int) (this.maxY / 10) / 2;
@@ -64,6 +65,29 @@ public class SnakeModel {
 
             this.preyCoordinate = new Coordinate(x, y);
             break;
+        }
+    }
+
+    private Coordinate getNewSnakeCoordinate() throws Exception {
+        /*
+        Returns the next snake coordinate. Computed using snakeCoordinates and currentDirection.
+        */
+        Coordinate snakeHead = this.snakeCoordinates.get(this.snakeCoordinates.size() - 1);
+        switch(this.currentDirection) {
+            case "left": 
+                return new Coordinate(snakeHead.getX() - 1, snakeHead.getY());
+
+            case "right": 
+                return new Coordinate(snakeHead.getX() + 1, snakeHead.getY());
+
+            case "up": 
+                return new Coordinate(snakeHead.getX(), snakeHead.getY() + 1);
+                
+            case "down": 
+                return new Coordinate(snakeHead.getX(), snakeHead.getY() - 1);
+                
+            default:
+                throw new Exception("This is an invalid direction: " + this.currentDirection);    
         }
     }
 
@@ -133,21 +157,25 @@ public class SnakeModel {
                 if(this.currentDirection == "right") {
                     return;
                 }
+                this.currentDirection = newDirection;
 
             case "right": 
                 if(this.currentDirection == "left") {
                     return;
                 }
+                this.currentDirection = newDirection;
 
             case "up": 
                 if(this.currentDirection == "down") {
                     return;
                 }
+                this.currentDirection = newDirection;
                 
             case "down": 
                 if(this.currentDirection == "up") {
                     return;
                 }
+                this.currentDirection = newDirection;
                 
             default:
                 throw new Exception("This is an invalid direction: " + newDirection);    
