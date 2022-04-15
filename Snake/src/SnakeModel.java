@@ -23,12 +23,23 @@ public class SnakeModel {
         this.maxY = GAME_HEIGHT / 10;
     }
 
-    public void gameTick() {
+    public void gameTick() throws Exception {
         /*
         Controls game progression. A game tick consists of the snake moving one step forward in its currentDirection.
         This method checks if the snake is still alive and if the prey has been eaten. If the prey is eaten it updates
         currentScore and generates a new preyCoordinate.
         */
+
+        Coordinate newSnakeCoordinate = getNewSnakeCoordinate(); // fetch new snake coordinate
+        
+        if(!isAlive(newSnakeCoordinate)) {
+            this.isAlive = false;
+        }
+
+        if(isPreyEaten(newSnakeCoordinate)) {
+            this.currentScore++;
+            createPrey();
+        }
     }
 
     private void createSnake() {
