@@ -87,16 +87,24 @@ public class SnakeModel {
             int x = getRandomNumber(this.minX, this.maxX);
             int y = getRandomNumber(this.minY, this.maxY);
 
-            // check if newly generate coordinate is inside the snake. If it is generate a new one.
-            for(Coordinate snakeCoordinate: snakeCoordinates) {
-                if(snakeCoordinate.getX() == x && snakeCoordinate.getY() == y) {
-                    continue;
-                }
+            Coordinate newPreyCoordinate = new Coordinate(x, y);
+            if(isNewPreyCoordinateInSnake(newPreyCoordinate)) {
+                continue;
             }
 
             this.preyCoordinate = new Coordinate(x, y);
             break;
         }
+    }
+
+    private boolean isNewPreyCoordinateInSnake(Coordinate newPreyCoordinate) {
+        for(Coordinate snakeCoordinate: snakeCoordinates) {
+            if(snakeCoordinate.getX() == newPreyCoordinate.getX() && snakeCoordinate.getY() == newPreyCoordinate.getY()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private Coordinate getNewSnakeCoordinate() throws Exception {
