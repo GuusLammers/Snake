@@ -12,7 +12,7 @@ public class SnakeModel {
     // class fields
     List<Coordinate> snakeCoordinates;
     Coordinate preyCoordinate;
-    String currentDirection;
+    String currentDirection = "right";
     int currentScore;
     boolean isAlive;
 
@@ -46,12 +46,20 @@ public class SnakeModel {
         
         if(!isAlive(newSnakeCoordinate)) {
             this.isAlive = false;
+            return;
         }
+
+        this.snakeCoordinates.add(newSnakeCoordinate);
 
         if(isPreyEaten(newSnakeCoordinate)) {
             this.currentScore++;
             createPrey();
+
+        } else {
+            this.snakeCoordinates.remove(0);
         }
+
+
     }
 
     private void createSnake() {
@@ -60,7 +68,7 @@ public class SnakeModel {
         represented by the coordinate at the end of the snakeCoordinates list.
         */
         int xCoordinate = ((int) this.maxX / 2) - 2; 
-        int yCoordinate = (int) (this.maxY / 10) / 2;
+        int yCoordinate = (int) this.maxY / 2;
 
         this.snakeCoordinates = new ArrayList<Coordinate>();
 
@@ -130,7 +138,7 @@ public class SnakeModel {
         Checks if the snake is still alive. The snake is dead if it goes out of bounds or if it eats itself.
         */
         // Check 1: Did snake go out of bounds.
-        if(newSnakeCoordinate.getX() < this.minX && newSnakeCoordinate.getX() > maxX && newSnakeCoordinate.getY() < this.minY && newSnakeCoordinate.getY() > maxY) {
+        if(newSnakeCoordinate.getX() < this.minX || newSnakeCoordinate.getX() > maxX - 1 || newSnakeCoordinate.getY() < this.minY || newSnakeCoordinate.getY() > maxY - 1) {
             return false;
         }
         // Check 2: Did snake eat itself.

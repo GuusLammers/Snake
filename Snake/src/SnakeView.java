@@ -1,12 +1,11 @@
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class SnakeView extends JFrame {
     
     int WINDOW_WIDTH;
     int WINDOW_HEIGHT;
 
-    JPanel snakePanel;
+    SnakePanel snakePanel;
 
     SnakeView(int GAME_WIDTH, int GAME_HEIGHT) {
         this.WINDOW_WIDTH = GAME_WIDTH;
@@ -16,9 +15,13 @@ public class SnakeView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         this.setSize(this.WINDOW_HEIGHT, this.WINDOW_HEIGHT);
         this.setResizable(false);
+        this.setUndecorated(true);
 
         snakePanel = new SnakePanel(this.WINDOW_WIDTH, this.WINDOW_HEIGHT);
         this.add(snakePanel);
+
+        System.out.println(this.getHeight());
+        System.out.println(this.getWidth());
     }
 
 }
