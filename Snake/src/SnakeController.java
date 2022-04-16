@@ -1,6 +1,9 @@
 import java.util.Timer;
 import java.util.TimerTask;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 public class SnakeController {
     
     int GAME_SPEED = 100;
@@ -12,7 +15,7 @@ public class SnakeController {
         this.snakeModel = snakeModel;
         this.snakeView = snakeView;
 
-        //this.snakeView.snakePanel.addKeyListener(new ArrowKeyListener());
+        this.snakeView.addKeyListener(new KeyListener());
 
         createGameTimer();
     }
@@ -43,6 +46,28 @@ public class SnakeController {
                 }
             }
           }, this.GAME_SPEED, this.GAME_SPEED);
+    }
+
+    class KeyListener extends KeyAdapter{
+        public void keyPressed(KeyEvent e)
+        {
+            try {
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    snakeModel.setCurrentDirection("up");
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    snakeModel.setCurrentDirection("down");
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    snakeModel.setCurrentDirection("left");
+                }   
+                else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    snakeModel.setCurrentDirection("right");
+                } 
+            } catch(Exception e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
 }

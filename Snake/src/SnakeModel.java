@@ -18,9 +18,9 @@ public class SnakeModel {
 
     SnakeModel(int GAME_WIDTH, int GAME_HEIGHT) {
         this.minX = 0;
-        this.maxX = GAME_WIDTH / 10;
+        this.maxX = GAME_WIDTH / 20;
         this.minY = 0;
-        this.maxY = GAME_HEIGHT / 10;
+        this.maxY = GAME_HEIGHT / 20;
 
         restart();
     }
@@ -112,13 +112,13 @@ public class SnakeModel {
                 return new Coordinate(snakeHead.getX() + 1, snakeHead.getY());
 
             case "up": 
-                return new Coordinate(snakeHead.getX(), snakeHead.getY() + 1);
-                
-            case "down": 
                 return new Coordinate(snakeHead.getX(), snakeHead.getY() - 1);
                 
+            case "down": 
+                return new Coordinate(snakeHead.getX(), snakeHead.getY() + 1);
+                
             default:
-                throw new Exception("This is an invalid direction: " + this.currentDirection);    
+                throw new Exception("This is an invalid direction: " + this.currentDirection + "!");    
         }
     }
 
@@ -208,8 +208,8 @@ public class SnakeModel {
                 }
                 this.currentDirection = newDirection;
                 
-            default:
-                throw new Exception("This is an invalid direction: " + newDirection);    
+            // default:
+            //     throw new Exception("This is an invalid direction: " + newDirection + "!");    
         }
     }
 

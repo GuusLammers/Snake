@@ -57,8 +57,8 @@ public class SnakePanel extends JPanel {
         /*
         Initializes the tiles that make up the snakes filed of play.
         */
-        int columnWidth = 10;
-        int rowWidth = 10;
+        int columnWidth = 20;
+        int rowWidth = 20;
         int columns = this.WINDOW_WIDTH / columnWidth;
         int rows = this.WINDOW_HEIGHT / rowWidth;
 
