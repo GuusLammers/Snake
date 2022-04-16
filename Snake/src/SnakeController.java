@@ -15,7 +15,7 @@ public class SnakeController {
         this.snakeModel = snakeModel;
         this.snakeView = snakeView;
 
-        this.snakeView.addKeyListener(new KeyListener());
+        this.snakeView.addKeyListener(new KeyArrowListener());
 
         createGameTimer();
     }
@@ -29,12 +29,16 @@ public class SnakeController {
             this.snakeView.snakePanel.resetTilesColors();
             this.snakeView.snakePanel.updateSnake(this.snakeModel.getSnakeCoordinates());
             this.snakeView.snakePanel.updatePrey(this.snakeModel.getPreyCoordinates());
+            this.snakeView.snakePanel.updateScoreLabel(Integer.toString(this.snakeModel.getCurrentScore()));
             this.snakeView.snakePanel.refreshPanel();
         }
     }
 
     private void createGameTimer() {
-
+        /*
+        Creates a timer that executes game updates at time intertvals of GAME_SPEED. 
+        When this timer is running the game is running.
+        */
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -48,7 +52,10 @@ public class SnakeController {
           }, this.GAME_SPEED, this.GAME_SPEED);
     }
 
-    class KeyListener extends KeyAdapter{
+    class KeyArrowListener extends KeyAdapter {
+        /*
+        A key pressed event listener that listens for arrow key inputs.
+        */
         public void keyPressed(KeyEvent e)
         {
             try {
