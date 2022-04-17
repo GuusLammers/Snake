@@ -99,6 +99,9 @@ public class SnakeModel {
     }
 
     private boolean isNewPreyCoordinateInSnake(Coordinate newPreyCoordinate) {
+        /*
+        Checks if the newPreyCoordinate exisits within snakeCoordinates. Returns true if it does.
+        */
         for(Coordinate snakeCoordinate: snakeCoordinates) {
             if(snakeCoordinate.getX() == newPreyCoordinate.getX() && snakeCoordinate.getY() == newPreyCoordinate.getY()) {
                 return true;

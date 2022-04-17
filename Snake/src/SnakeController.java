@@ -19,8 +19,7 @@ public class SnakeController {
         this.snakeView = snakeView;
 
         this.snakeView.addKeyListener(new KeyArrowListener());
-
-        //createGameTimer();
+        this.snakeView.addKeyListener(new SpaceBarListner());
     }
 
     private void updateGame() throws Exception {
@@ -37,6 +36,23 @@ public class SnakeController {
         }
     }
 
+    private void startGame() {
+        /*
+        Starts the game if it is not already running.
+        */
+        if(!gameRunning) {
+            snakeModel.restart();
+            createGameTimer();
+            // if it is the first run remove the start menu and load the score board
+            if(firstRun) {
+                snakeView.snakePanel.destroyStartMenu();
+                snakeView.snakePanel.createScoreLabel();
+                firstRun = false;
+            }
+            gameRunning = true;
+        }
+    }
+
     private void createGameTimer() {
         /*
         Creates a timer that executes game updates at time intertvals of GAME_SPEED. 
@@ -48,8 +64,8 @@ public class SnakeController {
             public void run() {
                 try {
                     updateGame();
+                    // stop timer if snake is dead
                     if(!snakeModel.getIsAlive()) {
-                        System.out.println("Cancel Timer");
                         timer.cancel();
                         gameRunning = false;
                     }
@@ -64,9 +80,7 @@ public class SnakeController {
         /*
         A key pressed event listener that listens for arrow key inputs.
         */
-        public void keyPressed(KeyEvent e)
-        {
-            System.out.println("Key Pressed");
+        public void keyPressed(KeyEvent e) {
             try {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     snakeModel.setCurrentDirection("up");
@@ -80,21 +94,18 @@ public class SnakeController {
                 else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     snakeModel.setCurrentDirection("right");
                 } 
-                else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    if(!gameRunning) {
-                        snakeModel.restart();
-                        createGameTimer();
-                        if(firstRun) {
-                            snakeView.snakePanel.destroyStartMenu();
-                            snakeView.snakePanel.createScoreLabel();
-                            firstRun = false;
-                        }
-                        gameRunning = true;
-                    }
-                }
             } catch(Exception e1) {
                 e1.printStackTrace();
             }
+        }
+    }
+
+    public class SpaceBarListner extends KeyAdapter {
+        /*
+        A key event listener that listens for the space bar to be pressed.
+        */
+        public void keyPressed(KeyEvent e) {
+            startGame();
         }
     }
 

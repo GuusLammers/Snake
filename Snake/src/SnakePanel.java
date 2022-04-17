@@ -33,8 +33,6 @@ public class SnakePanel extends JPanel {
         this.setLayout(new BorderLayout());
 
         createStartMenu();
-
-        //createScoreLabel();
         initializeTiles();
     }
 
@@ -144,6 +142,9 @@ public class SnakePanel extends JPanel {
     }
 
     public void destroyStartMenu() {
+        /*
+        Destroys the start menu by removing startGameMessageLabel from the panel.
+        */
         this.remove(this.startGameMessageLabel);
     }
 
