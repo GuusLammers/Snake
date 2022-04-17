@@ -31,6 +31,7 @@ public class SnakeModel {
         */
         createSnake();
         createPrey();
+        this.currentDirection = "right";
         this.currentScore = 0;
         this.isAlive = true;
     }

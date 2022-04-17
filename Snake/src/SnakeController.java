@@ -11,13 +11,16 @@ public class SnakeController {
     SnakeModel snakeModel;
     SnakeView snakeView;
 
+    boolean gameRunning = false;
+    boolean firstRun = true;
+
     SnakeController(SnakeModel snakeModel, SnakeView snakeView) throws Exception {
         this.snakeModel = snakeModel;
         this.snakeView = snakeView;
 
         this.snakeView.addKeyListener(new KeyArrowListener());
 
-        createGameTimer();
+        //createGameTimer();
     }
 
     private void updateGame() throws Exception {
@@ -45,6 +48,11 @@ public class SnakeController {
             public void run() {
                 try {
                     updateGame();
+                    if(!snakeModel.getIsAlive()) {
+                        System.out.println("Cancel Timer");
+                        timer.cancel();
+                        gameRunning = false;
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -52,12 +60,13 @@ public class SnakeController {
           }, this.GAME_SPEED, this.GAME_SPEED);
     }
 
-    class KeyArrowListener extends KeyAdapter {
+    public class KeyArrowListener extends KeyAdapter {
         /*
         A key pressed event listener that listens for arrow key inputs.
         */
         public void keyPressed(KeyEvent e)
         {
+            System.out.println("Key Pressed");
             try {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     snakeModel.setCurrentDirection("up");
@@ -71,6 +80,18 @@ public class SnakeController {
                 else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     snakeModel.setCurrentDirection("right");
                 } 
+                else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    if(!gameRunning) {
+                        snakeModel.restart();
+                        createGameTimer();
+                        if(firstRun) {
+                            snakeView.snakePanel.destroyStartMenu();
+                            snakeView.snakePanel.createScoreLabel();
+                            firstRun = false;
+                        }
+                        gameRunning = true;
+                    }
+                }
             } catch(Exception e1) {
                 e1.printStackTrace();
             }

@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.BorderLayout;
 
+
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -17,6 +18,7 @@ public class SnakePanel extends JPanel {
     int WINDOW_HEIGHT;
 
     JLabel scoreLabel;
+    JLabel startGameMessageLabel;
 
     Color baseTileColor = Color.white;
     Color snakeColor = Color.blue;
@@ -30,8 +32,9 @@ public class SnakePanel extends JPanel {
         this.setPreferredSize(new Dimension(this.WINDOW_WIDTH, this.WINDOW_HEIGHT));
         this.setLayout(new BorderLayout());
 
-        createScoreLabel();
+        createStartMenu();
 
+        //createScoreLabel();
         initializeTiles();
     }
 
@@ -118,7 +121,7 @@ public class SnakePanel extends JPanel {
         this.scoreLabel.setText(score);
     }
 
-    private void createScoreLabel() {
+    public void createScoreLabel() {
         /*
         Instantiates scoreLabel with a score of 0 and centers it in the middle of the screen.
         */
@@ -127,6 +130,21 @@ public class SnakePanel extends JPanel {
         this.scoreLabel.setHorizontalAlignment(JLabel.CENTER);
         this.scoreLabel.setVerticalAlignment(JLabel.CENTER);
         this.add(this.scoreLabel, BorderLayout.CENTER);
+    }
+
+    public void createStartMenu() {
+        /*
+        Sets up panel on startup.
+        */
+        this.startGameMessageLabel = new JLabel("Press Space To Start");
+        this.startGameMessageLabel.setFont(new Font("Showcard Gothic", Font.PLAIN, 25));
+        this.startGameMessageLabel.setHorizontalAlignment(JLabel.CENTER);
+        this.startGameMessageLabel.setVerticalAlignment(JLabel.CENTER);
+        this.add(this.startGameMessageLabel, BorderLayout.CENTER);
+    }
+
+    public void destroyStartMenu() {
+        this.remove(this.startGameMessageLabel);
     }
 
 }
