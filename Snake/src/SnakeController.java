@@ -105,7 +105,9 @@ public class SnakeController {
         A key event listener that listens for the space bar to be pressed.
         */
         public void keyPressed(KeyEvent e) {
-            startGame();
+            if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                startGame();
+            }
         }
     }
 
