@@ -9,7 +9,6 @@ public class App {
         SnakeView snakeView = new SnakeView(GAME_WIDTH, GAME_HEIGHT);
         new SnakeController(snakeModel, snakeView);
 
-        snakeView.setLocationRelativeTo(null);
         snakeView.setVisible(true);
     }
 

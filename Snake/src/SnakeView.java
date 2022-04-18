@@ -16,6 +16,7 @@ public class SnakeView extends JFrame {
         this.setSize(this.WINDOW_HEIGHT, this.WINDOW_HEIGHT);
         this.setResizable(false);
         this.setUndecorated(true);
+        this.setLocationRelativeTo(null);
 
         this.snakePanel = new SnakePanel(this.WINDOW_WIDTH, this.WINDOW_HEIGHT);
         this.add(this.snakePanel);
